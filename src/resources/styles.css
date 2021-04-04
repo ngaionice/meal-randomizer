@@ -1,0 +1,77 @@
+@font-face {
+    font-family: "Roboto Light";
+    src: url("fonts/RobotoLight.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Regular";
+    src: url("fonts/RobotoRegular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Thin";
+    src: url("fonts/RobotoThin.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Medium";
+    src: url("fonts/RobotoMedium.ttf");
+}
+
+.root {
+    -fx-color: -fx-base;
+    -fx-accent: #FF9800;
+    -fx-accent-light: #FFC947;
+    -fx-base: black;
+    -fx-material: #1B1B1B;
+    -fx-dialog-background: #212121;
+    -fx-content: #FFFFFF;
+    -fx-content-light: #EEEEEE;
+    -fx-font-family: Roboto Regular;
+}
+
+#nav-box {
+    -fx-padding: 0 5 0 5;
+}
+
+#nav-edit .ikonli-font-icon {
+    -fx-icon-code: "mdi-pencil";
+}
+
+#nav-pick .ikonli-font-icon {
+    -fx-icon-code: "mdi-play";
+}
+
+#nav-edit,
+#nav-pick{
+    -fx-font-size: 13px;
+    -fx-font-family: "Roboto Regular";
+    -fx-max-height: 48;
+    -fx-pref-height: 36;
+    -fx-max-width: 5000;
+    -fx-text-fill: -fx-content;
+    -fx-graphic-text-gap: 16;
+    -fx-alignment: center-left;
+    -fx-padding: 0 8 0 8;
+}
+
+#nav-edit .ikonli-font-icon,
+#nav-pick .ikonli-font-icon {
+    -fx-icon-color: -fx-content;
+}
+
+#back-pane {
+    -fx-padding: 10 10 10 10;
+}
+
+#content-pane {
+    -fx-background-color: -fx-material;
+}
+
+#check-bar {
+    -fx-padding: 10 10 10 10;
+}
+
+#inline-button {
+    -fx-pref-width: 100px;
+}
