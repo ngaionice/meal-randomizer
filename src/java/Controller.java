@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -36,20 +37,26 @@ public class Controller {
         root.setId("back-pane");
 
         BorderPane border = new BorderPane();
-        border.setId("content-pane");
+        border.setId("pick-pane");
         StackPane outputPane = new StackPane();
         ObservableList<String> choices = model.getFoodTypes();
         ObservableList<BooleanProperty> selected = FXCollections.observableArrayList();
 
         Text outputText = new Text("");
+        outputText.setId("output-text");
 
         VBox checkboxes = new VBox();
+        checkboxes.prefHeightProperty().bind(border.heightProperty());
         checkboxes.setId("check-bar");
-        checkboxes.getChildren().add(new Text("Food types"));
+        Text checkHeader = new Text("Pick");
+        checkHeader.setId("check-header");
+        checkboxes.getChildren().add(checkHeader);
         choices.forEach(item -> {
             BooleanProperty checked = new SimpleBooleanProperty(false);
             HBox row = new HBox();
+            row.setAlignment(Pos.CENTER_LEFT);
             Label checkBoxText = new Label(item);
+            checkBoxText.setId("checkbox-text");
             JFXCheckBox checkBox = new JFXCheckBox();
             checkBox.selectedProperty().bindBidirectional(checked);
             selected.add(checked);
@@ -58,6 +65,7 @@ public class Controller {
         });
 
         JFXButton pick = new JFXButton("Go");
+        pick.setId("pick-go");
         pick.setOnAction(e -> {
             List<String> picked = new ArrayList<>();
             Random picker = new Random();
@@ -93,7 +101,9 @@ public class Controller {
 
         GridPane grid = new GridPane();
         root.getChildren().add(grid);
-        grid.setId("content-pane");
+        grid.setId("edit-pane");
+        grid.setVgap(10);
+        grid.setHgap(12);
 
         ObservableList<String> foodTypes = model.getFoodTypes();
         JFXComboBox<String> dropdown = new JFXComboBox<>(foodTypes);
@@ -105,13 +115,14 @@ public class Controller {
         JFXButton addType = new JFXButton("Add food type");
         addFood.setId("inline-button");
         addType.setId("inline-button");
-        dropdown.setId("inline-button");
+        dropdown.setId("inline-dropdown");
 
 
         ListView<String> items = new ListView<>();
         if (foodTypes.size() > 0) {
             items.setItems(model.getFoodOfType(foodTypes.get(0)));
         }
+        items.setId("item-list");
 
         addFood.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
@@ -158,9 +169,6 @@ public class Controller {
 
         pick.setId("nav-pick");
         edit.setId("nav-edit");
-
-        pick.getStyleClass().add("nav");
-        edit.getStyleClass().add("nav");
 
         pick.setGraphic(new FontIcon());
         edit.setGraphic(new FontIcon());

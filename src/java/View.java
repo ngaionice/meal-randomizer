@@ -10,7 +10,7 @@ public class View extends Application {
     @Override
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 720, 720);
+        Scene scene = new Scene(root, 540, 540);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         con = new Controller(scene);

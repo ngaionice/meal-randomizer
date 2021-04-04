@@ -4,7 +4,7 @@
 }
 
 @font-face {
-    font-family: "Roboto Regular";
+    font-family: "Roboto";
     src: url("fonts/RobotoRegular.ttf");
 }
 
@@ -20,18 +20,19 @@
 
 .root {
     -fx-color: -fx-base;
-    -fx-accent: #FF9800;
-    -fx-accent-light: #FFC947;
-    -fx-base: black;
-    -fx-material: #1B1B1B;
-    -fx-dialog-background: #212121;
+    -fx-accent: #BDBDBD;
+    -fx-accent-light: #EFEFEF;
+    -fx-base: #1B1B1B;
+    -fx-material: #212121;
+    -fx-material-light: #373737;
     -fx-content: #FFFFFF;
     -fx-content-light: #EEEEEE;
-    -fx-font-family: Roboto Regular;
+    -fx-font-family: "Roboto Regular";
 }
 
 #nav-box {
-    -fx-padding: 0 5 0 5;
+    -fx-padding: 0 15 0 15;
+    -fx-background-color: -fx-material;
 }
 
 #nav-edit .ikonli-font-icon {
@@ -44,15 +45,14 @@
 
 #nav-edit,
 #nav-pick{
-    -fx-font-size: 13px;
-    -fx-font-family: "Roboto Regular";
+    -fx-font: 13px "Roboto Regular";
     -fx-max-height: 48;
     -fx-pref-height: 36;
     -fx-max-width: 5000;
     -fx-text-fill: -fx-content;
     -fx-graphic-text-gap: 16;
     -fx-alignment: center-left;
-    -fx-padding: 0 8 0 8;
+    -fx-padding: 0 10 0 10;
 }
 
 #nav-edit .ikonli-font-icon,
@@ -61,17 +61,101 @@
 }
 
 #back-pane {
-    -fx-padding: 10 10 10 10;
+    -fx-padding: 15;
+    -fx-background-color: -fx-base;
 }
 
 #content-pane {
     -fx-background-color: -fx-material;
+    -fx-background-radius: 3px;
+    -fx-padding: 15px;
 }
 
 #check-bar {
-    -fx-padding: 10 10 10 10;
+    -fx-spacing: 12px;
+    -fx-padding: 0 20 0 10;
+    -fx-border-width: 0 3 0 0;
+    -fx-border-color: -fx-content-light;
+    -fx-alignment: top-center;
+}
+
+#check-header {
+    -fx-font-family: "Roboto Medium";
+    -fx-fill: -fx-content;
+}
+
+#checkbox-text {
+    -fx-text-fill: -fx-content;
+    -fx-font-size: 13px;
+}
+
+#pick-go {
+    -fx-font: 13px "Roboto";
+    -fx-pref-height: 24;
+    -fx-max-width: 5000;
+    -fx-text-fill: -fx-content;
+    -fx-alignment: center;
+    -fx-padding: 0 10 0 10;
+    -fx-background-color: -fx-material-light;
+    -fx-vgap: 15px;
+    -fx-hgap: 10px;
+}
+
+#output-text {
+    -fx-font: 16px "Roboto Medium";
+    -fx-fill: -fx-content;
+}
+
+/*Edit pane*/
+
+#edit-pane {
+    -fx-background-color: -fx-material;
+    -fx-background-radius: 3px;
+    -fx-padding: 15px;
 }
 
 #inline-button {
     -fx-pref-width: 100px;
+    -fx-background-color: -fx-material-light;
+    -fx-text-fill: -fx-content;
+    -fx-font: 13px "Roboto";
 }
+
+#inline-dropdown {
+    -fx-pref-width: 100px;
+    -jfx-focus-color: -fx-content-light;
+    -jfx-unfocus-color: -fx-accent;
+}
+
+#inline-dropdown .list-cell {
+    -fx-font: 13px "Roboto";
+    -fx-text-fill: -fx-content;
+}
+
+.list-view,
+.list-view:focused {
+    -fx-border-color: TRANSPARENT;
+}
+
+.list-view:focused {
+    -fx-background-insets: 0, 1;
+}
+
+.list-view .list-cell {
+    -fx-font-family: "Roboto";
+    -fx-background-color: -fx-material;
+    -fx-text-fill: -fx-content;
+}
+
+.list-view {
+    -fx-background-color: -fx-material;
+}
+
+#item-list .list-cell{
+    -fx-border-width: 0;
+    -fx-pref-height: 24px;
+}
+
+
+
+
