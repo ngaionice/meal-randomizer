@@ -65,7 +65,7 @@
     -fx-background-color: -fx-base;
 }
 
-#content-pane {
+#pick-pane {
     -fx-background-color: -fx-material;
     -fx-background-radius: 3px;
     -fx-padding: 15px;
@@ -74,7 +74,7 @@
 #check-bar {
     -fx-spacing: 12px;
     -fx-padding: 0 20 0 10;
-    -fx-border-width: 0 3 0 0;
+    -fx-border-width: 0 2 0 0;
     -fx-border-color: -fx-content-light;
     -fx-alignment: top-center;
 }
@@ -114,17 +114,35 @@
     -fx-padding: 15px;
 }
 
-#inline-button {
-    -fx-pref-width: 100px;
+#inline-button,
+#inline-button-plus,
+#inline-button-minus {
     -fx-background-color: -fx-material-light;
     -fx-text-fill: -fx-content;
     -fx-font: 13px "Roboto";
 }
 
+#inline-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 28;
+}
+
+#inline-button-plus {
+    -fx-pref-width: 28;
+    -fx-pref-height: 28;
+}
+
+#inline-button-plus .ikonli-font-icon {
+    -fx-icon-code: "mdi-plus";
+    -fx-icon-color: -fx-content;
+}
+
+
 #inline-dropdown {
     -fx-pref-width: 100px;
     -jfx-focus-color: -fx-content-light;
     -jfx-unfocus-color: -fx-accent;
+    -fx-pref-height: 28;
 }
 
 #inline-dropdown .list-cell {
@@ -154,6 +172,16 @@
 #item-list .list-cell{
     -fx-border-width: 0;
     -fx-pref-height: 24px;
+}
+
+#context-menu {
+    -fx-background-color: #373737;
+    -fx-padding: 0 0 5 0;
+}
+
+#context-item {
+    -fx-padding: 8px 20px 8px 14px;
+    -fx-font-family: "Roboto";
 }
 
 

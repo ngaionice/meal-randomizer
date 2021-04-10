@@ -25,4 +25,8 @@ public class View extends Application {
     public void stop() {
         con.exit();
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

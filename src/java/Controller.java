@@ -1,7 +1,4 @@
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.*;
 import com.jfoenix.effects.JFXDepthManager;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,6 +8,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -103,7 +103,9 @@ public class Controller {
         root.getChildren().add(grid);
         grid.setId("edit-pane");
         grid.setVgap(10);
-        grid.setHgap(12);
+
+        HBox tools = new HBox();
+        tools.setSpacing(12);
 
         ObservableList<String> foodTypes = model.getFoodTypes();
         JFXComboBox<String> dropdown = new JFXComboBox<>(foodTypes);
@@ -111,18 +113,65 @@ public class Controller {
             dropdown.getSelectionModel().selectFirst();
         }
 
-        JFXButton addFood = new JFXButton("Add food");
-        JFXButton addType = new JFXButton("Add food type");
-        addFood.setId("inline-button");
-        addType.setId("inline-button");
+        JFXButton addFood = new JFXButton();
+        JFXButton addType = new JFXButton();
+        addFood.setId("inline-button-plus");
+        addType.setId("inline-button-plus");
         dropdown.setId("inline-dropdown");
 
+        addFood.setGraphic(new FontIcon());
+        addType.setGraphic(new FontIcon());
+
+        Region spacer = new Region();
+        spacer.setPrefWidth(40);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        tools.getChildren().addAll(addType, dropdown, spacer, addFood);
 
         ListView<String> items = new ListView<>();
         if (foodTypes.size() > 0) {
             items.setItems(model.getFoodOfType(foodTypes.get(0)));
         }
         items.setId("item-list");
+        items.setEditable(true);
+        items.setCellFactory(lv -> {
+            ListCell<String> cell = new ListCell<>();
+            ContextMenu contextMenu = new ContextMenu();
+            contextMenu.setId("context-menu");
+
+//            MenuItem editItem = new MenuItem();
+//            editItem.setText("Edit");
+//            editItem.setOnAction(e -> {
+//                String item = cell.getItem();
+//                // ???
+//            });
+
+            MenuItem deleteItem = new MenuItem();
+            deleteItem.setText("Delete");
+            deleteItem.setOnAction(e -> items.getItems().remove(cell.getItem()));
+            contextMenu.getItems().addAll(deleteItem);
+
+//            editItem.setId("context-item");
+            deleteItem.setId("context-item");
+
+            cell.textProperty().bind(cell.itemProperty());
+            cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
+                if (isNowEmpty) {
+                    cell.setContextMenu(null);
+                } else {
+                    cell.setContextMenu(contextMenu);
+                }
+            });
+
+            cell.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                System.out.println("Right clicked");
+                if (e.getButton() == MouseButton.SECONDARY) {
+                    contextMenu.show(cell, e.getScreenX(), e.getScreenY());
+                }
+            });
+
+            return cell;
+        });
 
         addFood.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
@@ -148,10 +197,8 @@ public class Controller {
         });
         dropdown.setOnAction(e -> items.setItems(model.getFoodOfType(dropdown.getValue())));
 
-        grid.add(dropdown, 2, 0);
-        grid.add(addFood, 0, 0);
-        grid.add(addType, 1, 0);
-        grid.add(items, 0, 1, 3, 1);
+        grid.add(tools, 0, 0);
+        grid.add(items, 0, 1);
 
         items.prefWidthProperty().bind(grid.widthProperty());
 
