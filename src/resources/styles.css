@@ -43,8 +43,13 @@
     -fx-icon-code: "mdi-play";
 }
 
+#nav-settings .ikonli-font-icon {
+    -fx-icon-code: "mdi-settings";
+}
+
 #nav-edit,
-#nav-pick{
+#nav-pick,
+#nav-settings {
     -fx-font: 13px "Roboto Regular";
     -fx-max-height: 48;
     -fx-pref-height: 36;
@@ -56,7 +61,8 @@
 }
 
 #nav-edit .ikonli-font-icon,
-#nav-pick .ikonli-font-icon {
+#nav-pick .ikonli-font-icon,
+#nav-settings .ikonli-font-icon{
     -fx-icon-color: -fx-content;
 }
 
@@ -116,27 +122,40 @@
 
 #inline-button,
 #inline-button-plus,
-#inline-button-minus {
+#inline-button-plus-type {
     -fx-background-color: -fx-material-light;
     -fx-text-fill: -fx-content;
     -fx-font: 13px "Roboto";
 }
+
 
 #inline-button {
     -fx-pref-width: 100px;
     -fx-pref-height: 28;
 }
 
-#inline-button-plus {
+#inline-button-plus,
+#inline-button-plus-type {
     -fx-pref-width: 28;
     -fx-pref-height: 28;
 }
 
-#inline-button-plus .ikonli-font-icon {
+#inline-button-plus .ikonli-font-icon,
+#inline-button-plus-type .ikonli-font-icon{
     -fx-icon-code: "mdi-plus";
+}
+
+#inline-button-plus .ikonli-font-icon {
+    -fx-icon-color: -fx-base;
+}
+
+#inline-button-plus-type .ikonli-font-icon {
     -fx-icon-color: -fx-content;
 }
 
+#inline-button-plus {
+    -fx-background-color: -fx-content-light;
+}
 
 #inline-dropdown {
     -fx-pref-width: 100px;

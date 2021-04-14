@@ -38,4 +38,8 @@ public class Serializer {
             e.printStackTrace();
         }
     }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }

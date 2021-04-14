@@ -6,9 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -106,6 +108,7 @@ public class Controller {
 
         HBox tools = new HBox();
         tools.setSpacing(12);
+        tools.setAlignment(Pos.BASELINE_CENTER);
 
         ObservableList<String> foodTypes = model.getFoodTypes();
         JFXComboBox<String> dropdown = new JFXComboBox<>(foodTypes);
@@ -116,7 +119,7 @@ public class Controller {
         JFXButton addFood = new JFXButton();
         JFXButton addType = new JFXButton();
         addFood.setId("inline-button-plus");
-        addType.setId("inline-button-plus");
+        addType.setId("inline-button-plus-type");
         dropdown.setId("inline-dropdown");
 
         addFood.setGraphic(new FontIcon());
@@ -164,7 +167,6 @@ public class Controller {
             });
 
             cell.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                System.out.println("Right clicked");
                 if (e.getButton() == MouseButton.SECONDARY) {
                     contextMenu.show(cell, e.getScreenX(), e.getScreenY());
                 }
@@ -207,28 +209,57 @@ public class Controller {
         return root;
     }
 
+    Pane getSettingsPane() {
+
+        StackPane root = new StackPane();
+        root.setId("back-pane");
+
+        GridPane grid = new GridPane();
+        root.getChildren().add(grid);
+        grid.setId("edit-pane");
+        grid.setVgap(10);
+
+        grid.add(new Text("Work in progress"), 0 ,0);
+//        JFXTextField address = new JFXTextField();
+//        address.setOnKeyPressed(e -> {
+//            if (e.getCode() == KeyCode.ENTER) {
+//                // TODO: save
+//            }
+//        });
+
+        JFXDepthManager.setDepth(grid, 1);
+
+        return root;
+    }
+
     VBox getNav(BorderPane root) {
         VBox nav = new VBox();
         nav.setId("nav-box");
 
         JFXButton pick = new JFXButton("Get meal!");
         JFXButton edit = new JFXButton("Edit choices");
+        JFXButton settings = new JFXButton("Settings");
 
         pick.setId("nav-pick");
         edit.setId("nav-edit");
+        settings.setId("nav-settings");
 
         pick.setGraphic(new FontIcon());
         edit.setGraphic(new FontIcon());
+        settings.setGraphic(new FontIcon());
 
         Region spacer = new Region();
         spacer.prefHeightProperty().bind(sc.heightProperty().multiply(0.125));
 
         pick.setOnAction(e -> root.setCenter(getPickPane()));
         edit.setOnAction(e -> root.setCenter(getEditPane()));
+        settings.setOnAction(e -> root.setCenter(getSettingsPane()));
 
-        nav.getChildren().addAll(spacer, pick, edit);
+        nav.getChildren().addAll(spacer, pick, edit, settings);
         return nav;
     }
+
+
 
     void exit() {
         dataLoader.saveData(model.export());
